@@ -9,17 +9,21 @@ LocalWeather.controller('getWeather', ['$scope', '$http', function($scope,$http)
 	    if(navigator.geolocation){
 	      // console.log(navigator.geolocation.getCurrentPositon());
 	      navigator.geolocation.getCurrentPosition(function(position) {
-	        console.log(position);
-	        $scope.lat = position.coords.latitude;
-	        $scope.lng = position.coords.longitude;
-	    	});
-	    }
+	        	console.log(position);
+	        	$scope.lat = position.coords.latitude;
+	        	$scope.lng = position.coords.longitude;
+	        	$scope.Populate();
+	   		});
+	    } else {
+      		alert('No Browser Supported geolocation');
+    	}
 	}
 
 	$scope.Populate = function() {
+
 		$http({
 			method: 'GET',
-			url : 'api.openweathermap.org/data/2.5/weather?APPID=3656d7b3242d336d2508e90499daceff',
+			url : 'http://api.openweathermap.org/data/2.5/weather?APPID=3656d7b3242d336d2508e90499daceff',
 			params: {
 				lat: $scope.lat,
 				lon: $scope.lng,
@@ -32,6 +36,7 @@ LocalWeather.controller('getWeather', ['$scope', '$http', function($scope,$http)
 			console.log('error', response);
 		})
 	}
-	$scope.Populate();
+	
+	getLocation();
 
 }])
