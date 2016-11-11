@@ -4,7 +4,6 @@ LocalWeather = angular.module('LocalWeather', [])
 
 LocalWeather.controller('getWeather', ['$scope', '$http', function($scope,$http) {
 
-
 	function getLocation(){
 	    if(navigator.geolocation){
 	      // console.log(navigator.geolocation.getCurrentPositon());
@@ -38,5 +37,21 @@ LocalWeather.controller('getWeather', ['$scope', '$http', function($scope,$http)
 	}
 	
 	getLocation();
+
+	$scope.unit = 'F'
+
+	$scope.convert = function() {
+		if ($scope.unit === 'F') {
+
+			$scope.unit = 'C';
+			$scope.res.main.temp = Math.floor(($scope.res.main.temp - 32) * (5/9));
+
+		} else {
+			$scope.unit = 'F'
+			$scope.res.main.temp = Math.ceil(($scope.res.main.temp * (9/5)) + 32);
+		}
+
+
+	}
 
 }])

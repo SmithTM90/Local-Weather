@@ -19,7 +19,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	</head>
 	<body ng-app="LocalWeather">
-		<div ng-controller="getWeather" class="mainContainer col-xs-4 col-xs-offset-4"><h1>Local Weather</h1> <br> {{res.name}}, {{res.sys.country}} <br> {{res.main.temp}} &degF
+		<div ng-controller="getWeather" class="mainContainer col-xs-4 col-xs-offset-4"><h1>Local Weather</h1> <br> {{res.name}}, {{res.sys.country}} <br> {{res.main.temp}} &deg{{unit}}
+			<br>
+			<button ng-click="convert()">Convert</button>
 			<div>{{res.weather[0].description}}</div>
 			<img class="icon" src="http://api.openweathermap.org/img/w/{{res.weather[0].icon}}.png" alt="">
 		</div>
